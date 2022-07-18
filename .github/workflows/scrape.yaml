@@ -1,7 +1,6 @@
 name: Scrape
 on:
-  schedule:
-    - cron: "* * * * *"
+  workflow_dispatch:
 
 jobs:
   check-gm1:
