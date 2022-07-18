@@ -1,13 +1,16 @@
 name: Scrape
 on:
   schedule:
-    - cron: "*/1 * * * *"
+    - cron: "* * * * *"
 
 jobs:
   check-gm1:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4
         with:
           python-version: 3.7
+          cache: 'pip'
+      - run: pip install wget
+      - run: python3 game-manual.py
