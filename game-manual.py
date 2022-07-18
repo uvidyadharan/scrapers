@@ -21,7 +21,7 @@ try:
 except:
   oldHash = ""
   
-if oldhash != sha256.hexdigest():
+if oldHash != sha256.hexdigest():
   os.environ["UPDATED"] = "1"
   with open("gm1.pdf.sha256", "w") as hashFile:
     hashFile.write(sha256.hexdigest())
