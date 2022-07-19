@@ -27,6 +27,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
       - name: Send Notification
+        if: env.UPDATED == '1'
         uses: techulus/push-github-action@1.0.0
         env:
           API_KEY: ${{ secrets.API_KEY }}
