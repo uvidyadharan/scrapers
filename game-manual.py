@@ -1,5 +1,6 @@
 import wget
 import hashlib
+import os
 
 wget.download("https://www.firstinspires.org/sites/default/files/uploads/resource_library/ftc/game-manual-part-1-traditional-events.pdf", "gm1.pdf")
 
@@ -14,6 +15,8 @@ with open("gm1.pdf", 'rb') as file:
       break
     sha256.update(data)
     
+print(sha256.hexdigest())
+
 try:
   with open("gm1.pdf.sha256", "r") as hashFile:
     oldHash = hashFile.read()
@@ -21,9 +24,9 @@ except:
   oldHash = ""
   
 if oldHash != sha256.hexdigest():
-  print(1)
+  os.environ["UPDATED"] = "0"
   with open("gm1.pdf.sha256", "w") as hashFile:
     hashFile.write(sha256.hexdigest())
 else:
-  print(0)
+  os.environ["UPDATED"] = "0"
   
