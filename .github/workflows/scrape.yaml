@@ -12,7 +12,9 @@ jobs:
           python-version: 3.7
           cache: 'pip'
       - run: pip install wget
-      - run:  echo "UPDATED=$(echo $UPDATED )" >> $GITHUB_ENV 
+      - run:  |
+          echo "UPDATED=$(echo $UPDATED )" >> $GITHUB_ENV 
+          echo $UPDATED
       - name: Commit Hash
         if: env.UPDATED == '1'
         run: |
