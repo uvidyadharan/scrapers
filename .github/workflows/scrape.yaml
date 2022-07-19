@@ -13,3 +13,22 @@ jobs:
           cache: 'pip'
       - run: pip install wget
       - run: python3 game-manual.py
+      - name: Commit Hash
+        if: env.UPDATED == '1'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add gm1.pdf.sha256
+          git commit -m "Update gm1.pdf.sha256"
+      - name: Update Hash
+        if: env.UPDATED == '1'
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }
+      - name: Send Notification
+        uses: techulus/push-github-action@1.0.0
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          MESSAGE: "GM1 has been Updated"
+        
