@@ -25,7 +25,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }
+          branch: ${{ github.ref }}
       - name: Send Notification
         uses: techulus/push-github-action@1.0.0
         env:
