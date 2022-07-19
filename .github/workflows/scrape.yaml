@@ -12,7 +12,7 @@ jobs:
           python-version: 3.7
           cache: 'pip'
       - run: pip install wget
-      - run: python3 game-manual.py && echo  ${{ env.UPDATED }}
+      - run:  echo "UPDATED=$(echo $UPDATED )" >> $GITHUB_ENV >> 
       - name: Commit Hash
         if: env.UPDATED == '1'
         run: |
