@@ -13,6 +13,7 @@ jobs:
           cache: 'pip'
       - run: pip install wget
       - run:  |
+          python3 game-manual.py
           echo "UPDATED=$(echo $UPDATED )" >> $GITHUB_ENV 
           echo $UPDATED
       - name: Commit Hash
