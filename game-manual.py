@@ -15,7 +15,6 @@ with open("gm1.pdf", 'rb') as file:
       break
     sha256.update(data)
     
-print(sha256.hexdigest())
 
 try:
   with open("gm1.pdf.sha256", "r") as hashFile:
@@ -25,8 +24,10 @@ except:
   
 if oldHash != sha256.hexdigest():
   os.environ["UPDATED"] = "0"
+  print(0)
   with open("gm1.pdf.sha256", "w") as hashFile:
     hashFile.write(sha256.hexdigest())
 else:
   os.environ["UPDATED"] = "0"
+  print(1)
   
