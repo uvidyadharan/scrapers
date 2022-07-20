@@ -8,7 +8,7 @@ buffer = 100000
 sha256 = hashlib.sha256()
 oldHash = None
 
-with open("gm1.pdf", 'rb') as file:
+with open("gm2.pdf", 'rb') as file:
   while True:
     data = file.read(buffer)
     if not data:
