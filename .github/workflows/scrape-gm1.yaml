@@ -15,7 +15,7 @@ jobs:
           cache: 'pip'
       - run: pip install wget
       - run:  |
-          echo "UPDATED=$(python3 game-manual.py)" >> $GITHUB_ENV 
+          echo "UPDATED=$(python3 game-manual-1.py)" >> $GITHUB_ENV 
       - name: Commit Hash
         continue-on-error: true
         if: env.UPDATED == '1'
