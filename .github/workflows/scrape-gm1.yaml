@@ -1,4 +1,4 @@
-name: Scrape
+name: Scrape GM1
 on:
   workflow_dispatch:
   schedule:
