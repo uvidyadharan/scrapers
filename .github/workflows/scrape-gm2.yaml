@@ -24,6 +24,7 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add gm2.pdf.sha256
+          git add gm2.pdf
           git commit -m "Update gm2.pdf.sha256"
       - name: Update Hash
         if: env.UPDATED == '1' && steps.commit.outcome != 'failure'
