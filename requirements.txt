@@ -1,1 +1,2 @@
 wget
+pushbullet.py==0.9.1

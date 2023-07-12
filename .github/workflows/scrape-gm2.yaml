@@ -13,9 +13,9 @@ jobs:
         with:
           python-version: 3.7
           cache: 'pip'
-      - run: pip install wget
+      - run: pip install -r requirements.txt
       - run:  |
-          echo "UPDATED=$(python3 game-manual-2.py)" >> $GITHUB_ENV 
+          python3 game-manual-2.py
       - name: Commit Hash
         continue-on-error: true
         if: env.UPDATED == '1'
@@ -32,10 +32,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
-      - name: Send Notification
-        if: env.UPDATED == '1' && steps.commit.outcome != 'failure'
-        uses: techulus/push-github-action@1.0.0
-        env:
-          API_KEY: ${{ secrets.API_KEY }}
-          MESSAGE: "GM2 has been Updated"
-        

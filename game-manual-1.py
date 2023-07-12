@@ -1,33 +1,38 @@
 import wget
 import hashlib
 import os
+from pushbullet import PushBullet
 
-wget.download("https://www.firstinspires.org/sites/default/files/uploads/resource_library/ftc/game-manual-part-1-traditional-events.pdf", "gm1.pdf")
+filename = "gm1.pdf"
+
+access_token = os.getenv('PUSHBULLET_ACCESS_TOKEN')
+pb = PushBullet(access_token)
+
+if os.path.exists(filename):
+  os.remove(filename)
+wget.download("https://www.firstinspires.org/sites/default/files/uploads/resource_library/ftc/game-manual-part-1-traditional-events.pdf", filename)
 
 buffer = 100000
 sha256 = hashlib.sha256()
 oldHash = None
 
-with open("gm1.pdf", 'rb') as file:
+with open(filename, 'rb') as file:
   while True:
     data = file.read(buffer)
     if not data:
       break
     sha256.update(data)
     
+hashName = filename + ".sha256"
 
 try:
-  with open("gm1.pdf.sha256", "r") as hashFile:
+  with open(hashName, "r") as hashFile:
     oldHash = hashFile.read()
 except:
   oldHash = ""
   
 if oldHash != sha256.hexdigest():
-  os.environ["UPDATED"] = "1"
-  print(1)
-  with open("gm1.pdf.sha256", "w") as hashFile:
+  with open(hashName, "w") as hashFile:
     hashFile.write(sha256.hexdigest())
-else:
-  os.environ["UPDATED"] = "0"
-  print(1)
-  
+
+  pb.push_note("Game Manual 1 Updated", "The Game Manual 1 has been updated. Please download the new version.")
