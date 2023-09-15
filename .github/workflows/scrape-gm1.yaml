@@ -1,9 +1,6 @@
 name: Scrape GM1
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '*/5 * * * *'
-
 jobs:
   check-gm1:
     runs-on: ubuntu-latest
